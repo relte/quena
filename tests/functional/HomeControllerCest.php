@@ -2,7 +2,7 @@
 
 namespace App\Tests;
 
-class HomeCest
+class HomeControllerCest
 {
     public function itIsTitledWithTheApplicationName(FunctionalTester $I): void
     {
@@ -15,7 +15,7 @@ class HomeCest
     {
         $I->amOnPage('/');
         $I->canSeeElement('form');
-        $I->canSeeElement('form > input');
+        $I->canSeeElement('form > input[name="search"]');
         $I->canSeeElement('form > button[type="submit"]');
     }
 }
