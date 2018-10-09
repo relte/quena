@@ -27,7 +27,7 @@
         "codeception/codeception": "^2.5",
         "symfony/debug-pack": "*",
         "symfony/dotenv": "*",
-        "symfony/maker-bundle": "^1.0",
+        "symfony/maker-bundle": "^1.7",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "*",
         "symfony/web-server-bundle": "*"
@@ -66,7 +66,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "test": "vendor/bin/codecept run",
+        "new-test": "vendor/bin/codecept g:cest"
     },
     "conflict": {
         "symfony/symfony": "*"
