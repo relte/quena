@@ -2,28 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Quena</title>
+    <title>{% block title %}Quena{% endblock %}</title>
 </head>
 <body>
-
-<h1>Quena</h1>
-
-<form method="get" action="/">
-    <input name="search" type="text">
-    <button type="submit">Search</button>
-</form>
-
-{% if answers is defined and answers is not empty %}
-    {% for answer in answers %}
-        <ul>
-            <li>
-                <strong>{{ answer.question }}</strong>
-                <br>
-                <p>{{ answer.content }}</p>
-            </li>
-        </ul>
-    {% endfor %}
-{% endif %}
-
+    <h1>Quena</h1>
+    {% block body %}{% endblock %}
 </body>
 </html>

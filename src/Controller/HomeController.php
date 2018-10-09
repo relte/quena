@@ -18,19 +18,19 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="home_index")
      */
     public function index(Request $request): Response
     {
+        $parameters = [];
+
         if ($request->query->has('search')) {
             $searchPhrase = $request->query->get('search');
             $answers = $this->answerRepository->findByPhrase($searchPhrase);
 
-            return $this->render('base.html.twig', [
-                'answers' => $answers
-            ]);
+            $parameters = ['answers' => $answers];
         }
 
-        return $this->render('base.html.twig');
+        return $this->render('home/index.html.twig', $parameters);
     }
 }
