@@ -36,7 +36,7 @@ class AnswerCrudCest
         $I->amOnPage('/answers/new');
         $I->fillField('Question', self::FIRST_QUESTION);
         $I->fillField('Content', self::FIRST_ANSWER_CONTENT);
-        $I->click('Save');
+        $I->click('#save_answer');
         $I->see(self::FIRST_QUESTION);
         $I->see(self::FIRST_ANSWER_CONTENT);
     }
@@ -52,10 +52,10 @@ class AnswerCrudCest
         $I->see(self::FIRST_QUESTION);
         $I->see(self::FIRST_ANSWER_CONTENT);
 
-        $I->click('edit');
+        $I->click('#edit_answer_1');
         $I->fillField('Question', self::SECOND_QUESTION);
         $I->fillField('Content', self::SECOND_ANSWER_CONTENT);
-        $I->click('Update');
+        $I->click('#save_answer');
 
         $I->cantSee(self::FIRST_QUESTION);
         $I->cantSee(self::FIRST_ANSWER_CONTENT);
@@ -72,7 +72,7 @@ class AnswerCrudCest
         $I->persistEntity($firstAnswer);
 
         $I->amOnPage('/answers');
-        $I->click('Delete');
+        $I->click('#delete_answer_1');
 
         $I->cantSee(self::FIRST_QUESTION);
         $I->cantSee(self::FIRST_ANSWER_CONTENT);

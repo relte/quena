@@ -29,7 +29,7 @@ class SearchingCest
     {
         $I->amOnPage('/');
         $I->fillField(['name' => 'search'], 'find an answer');
-        $I->click('Search');
+        $I->click('#search');
 
         $I->see(self::FIRST_QUESTION);
         $I->see(self::FIRST_ANSWER_CONTENT);
