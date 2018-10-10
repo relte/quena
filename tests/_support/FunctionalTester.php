@@ -1,6 +1,8 @@
 <?php
 namespace App\Tests;
 
+use App\Entity\Answer;
+
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -23,4 +25,18 @@ class FunctionalTester extends \Codeception\Actor
    /**
     * Define custom actions here
     */
+    public function persistAnswer(string $question, string $content): void
+    {
+        $answer = new Answer();
+        $answer->setQuestion($question);
+        $answer->setContent($content);
+        $this->persistEntity($answer);
+    }
+
+    public function searchForAnswer(string $phrase): void
+    {
+        $this->amOnPage('/');
+        $this->fillField(['name' => 'search'], $phrase);
+        $this->click('#search');
+    }
 }

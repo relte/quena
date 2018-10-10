@@ -14,21 +14,25 @@ class AnswerCrudCest
 
     public function itShowsAnswers(FunctionalTester $I): void
     {
-        $firstAnswer = new Answer();
-        $firstAnswer->setQuestion(self::FIRST_QUESTION);
-        $firstAnswer->setContent(self::FIRST_ANSWER_CONTENT);
-        $I->persistEntity($firstAnswer);
-
-        $secondAnswer = new Answer();
-        $secondAnswer->setQuestion(self::SECOND_QUESTION);
-        $secondAnswer->setContent(self::SECOND_ANSWER_CONTENT);
-        $I->persistEntity($secondAnswer);
+        $I->persistAnswer(self::FIRST_QUESTION, self::FIRST_ANSWER_CONTENT);
+        $I->persistAnswer(self::SECOND_QUESTION, self::SECOND_ANSWER_CONTENT);
 
         $I->amOnPage('/answers');
         $I->see(self::FIRST_QUESTION);
         $I->see(self::FIRST_ANSWER_CONTENT);
         $I->see(self::SECOND_QUESTION);
         $I->see(self::SECOND_ANSWER_CONTENT);
+    }
+
+    public function itShowsAnAnswerWithMarkdownParsed(FunctionalTester $I): void
+    {
+        $I->persistAnswer(
+            'How do you emphasize a phrase in Markdown?',
+            'To _emphasize_ wrap a phrase with single underscores.'
+        );
+
+        $I->amOnPage('/answers');
+        $I->seeInSource('To <em>emphasize</em> wrap a phrase with single underscores.');
     }
 
     public function itCreatesANewAnswer(FunctionalTester $I): void
@@ -43,10 +47,7 @@ class AnswerCrudCest
 
     public function itEditsAnAnswer(FunctionalTester $I): void
     {
-        $firstAnswer = new Answer();
-        $firstAnswer->setQuestion(self::FIRST_QUESTION);
-        $firstAnswer->setContent(self::FIRST_ANSWER_CONTENT);
-        $I->persistEntity($firstAnswer);
+        $I->persistAnswer(self::FIRST_QUESTION, self::FIRST_ANSWER_CONTENT);
 
         $I->amOnPage('/answers');
         $I->see(self::FIRST_QUESTION);
@@ -66,10 +67,7 @@ class AnswerCrudCest
 
     public function itDeletesAnAnswer(FunctionalTester $I): void
     {
-        $firstAnswer = new Answer();
-        $firstAnswer->setQuestion(self::FIRST_QUESTION);
-        $firstAnswer->setContent(self::FIRST_ANSWER_CONTENT);
-        $I->persistEntity($firstAnswer);
+        $I->persistAnswer(self::FIRST_QUESTION, self::FIRST_ANSWER_CONTENT);
 
         $I->amOnPage('/answers');
         $I->click('#delete_answer_1');

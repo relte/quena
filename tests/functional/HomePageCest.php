@@ -2,7 +2,7 @@
 
 namespace App\Tests;
 
-class HomeControllerCest
+class HomePageCest
 {
     public function itIsTitledWithTheApplicationName(FunctionalTester $I): void
     {

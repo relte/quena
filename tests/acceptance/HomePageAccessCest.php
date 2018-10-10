@@ -2,7 +2,7 @@
 
 namespace App\Tests;
 
-class HomePageCest
+class HomePageAccessCest
 {
     public function homepageWorks(AcceptanceTester $I): void
     {
