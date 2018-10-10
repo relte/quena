@@ -3,9 +3,7 @@
 {% block title %}{{ parent() }} | {{ 'app.header.new_answer'|trans }}{% endblock %}
 
 {% block body %}
-    <h2>{{ 'app.header.new_answer'|trans }}</h2>
+    <h3><a href="{{ path('answer_index') }}">{{ 'app.header.answer_list'|trans }}</a> | {{ 'app.header.new_answer'|trans }}</h3>
 
     {{ include('answer/_form.html.twig') }}
-
-    <a href="{{ path('answer_index') }}">{{ 'app.link.go_back_to_list'|trans }}</a>
 {% endblock %}

@@ -1,24 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <form class="form-inline" method="get" action="/">
-        <input class="form-control mr-2" name="search" type="text">
-        <button id="search" class="btn btn-primary action-search" type="submit">{{ 'app.button.search'|trans }}</button>
-    </form>
+{% block main %}
+    <div class="d-flex flex-column align-items-center">
+        {{ parent() }}
+        <form class="form-inline mb-4" method="get" action="/">
+            <input class="form-control mr-2" name="search" type="text">
+            <button id="search" class="btn btn-primary action-search" type="submit">{{ 'app.button.search'|trans }}</button>
+        </form>
+        <a href="{{ path('answer_index') }}">{{ 'app.link.manage_answers'|trans }}</a>
+    </div>
+{% endblock %}
 
+{% block body %}
     {% if answers is defined and answers is not empty %}
         {% for answer in answers %}
-            <ul>
-                <li>
-                    <strong>{{ answer.question }}</strong>
-                    <br>
-                    <p>{{ answer.content }}</p>
-                </li>
-            </ul>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ answer.question }}</h5>
+                    <div class="card-text">{{ answer.content }}</div>
+                </div>
+            </div>
         {% endfor %}
     {% endif %}
-
-    <hr>
-
-    <a href="{{ path('answer_index') }}">{{ 'app.link.manage_answers'|trans }}</a>
 {% endblock %}

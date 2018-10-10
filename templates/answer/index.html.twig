@@ -3,7 +3,7 @@
 {% block title %}{{ parent() }} | {{ 'app.header.answer_list'|trans }}{% endblock %}
 
 {% block body %}
-    <h2>{{ 'app.header.answer_list'|trans }}</h2>
+    <h3>{{ 'app.header.answer_list'|trans }}</h3>
 
     <table class="table">
         <thead>
@@ -18,8 +18,8 @@
             <tr>
                 <td>{{ answer.question }}</td>
                 <td>{{ answer.content }}</td>
-                <td class="btn-group">
-                    <a id="edit_answer_{{ answer.id }}" class="btn btn-light" href="{{ path('answer_edit', {'id': answer.id}) }}">{{ 'app.button.edit'|trans }}</a>
+                <td class="d-flex">
+                    <a id="edit_answer_{{ answer.id }}" class="btn btn-primary mr-2" href="{{ path('answer_edit', {'id': answer.id}) }}">{{ 'app.button.edit'|trans }}</a>
                     {% include 'answer/_delete_form.html.twig' %}
                 </td>
             </tr>
