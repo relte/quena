@@ -7,3 +7,12 @@
 
     {{ include('answer/_form.html.twig') }}
 {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script>new SimpleMDE();</script>
+{% endblock %}
