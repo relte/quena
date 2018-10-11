@@ -18,9 +18,9 @@ use App\Entity\Answer;
  *
  * @SuppressWarnings(PHPMD)
 */
-class FunctionalTester extends \Codeception\Actor
+class ApiTester extends \Codeception\Actor
 {
-    use _generated\FunctionalTesterActions;
+    use _generated\ApiTesterActions;
 
     public function persistAnswer(string $question, string $content): void
     {
@@ -30,10 +30,8 @@ class FunctionalTester extends \Codeception\Actor
         $this->persistEntity($answer);
     }
 
-    public function searchForAnswer(string $phrase): void
+    public function seeJsonResponseEquals(array $expected): void
     {
-        $this->amOnPage('/');
-        $this->fillField(['name' => 'search'], $phrase);
-        $this->click('#search');
+        $this->seeResponseEquals(json_encode($expected));
     }
 }

@@ -2,10 +2,15 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AnswerRepository")
+ *
+ * @ApiResource()
  */
 class Answer
 {
@@ -18,6 +23,8 @@ class Answer
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @ApiFilter(SearchFilter::class, strategy="partial")
      */
     private $question;
 
