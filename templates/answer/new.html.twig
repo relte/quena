@@ -14,5 +14,5 @@
 
 {% block javascripts %}
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-    <script>new SimpleMDE();</script>
+    <script>{% include 'answer/_markdown_editor.js.twig' %}</script>
 {% endblock %}

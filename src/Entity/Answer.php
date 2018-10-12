@@ -43,11 +43,9 @@ class Answer
         return $this->question;
     }
 
-    public function setQuestion(string $question): self
+    public function setQuestion(string $question): void
     {
         $this->question = $question;
-
-        return $this;
     }
 
     public function getContent(): ?string
@@ -55,10 +53,8 @@ class Answer
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(string $content): void
     {
         $this->content = $content;
-
-        return $this;
     }
 }
