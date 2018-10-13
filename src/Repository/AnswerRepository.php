@@ -19,7 +19,7 @@ class AnswerRepository extends ServiceEntityRepository
     public function findByPhrase(string $phrase): array
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.question LIKE :phrase')
+            ->andWhere('a.entry LIKE :phrase')
             ->setParameter('phrase', '%' . $phrase . '%')
             ->setMaxResults(5)
             ->getQuery()

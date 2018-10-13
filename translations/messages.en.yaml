@@ -19,6 +19,6 @@ app:
         nothing_found: nothing found
     field:
         answer:
-            question: Question
+            entry: Entry
             content: Content
         actions: Actions

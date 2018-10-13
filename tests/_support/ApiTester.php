@@ -22,10 +22,10 @@ class ApiTester extends \Codeception\Actor
 {
     use _generated\ApiTesterActions;
 
-    public function persistAnswer(string $question, string $content): void
+    public function persistAnswer(string $entry, string $content): void
     {
         $answer = new Answer();
-        $answer->setQuestion($question);
+        $answer->setEntry($entry);
         $answer->setContent($content);
         $this->persistEntity($answer);
     }

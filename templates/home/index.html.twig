@@ -15,7 +15,7 @@
     {% if answers is defined and answers is not empty %}
         {% for answer in answers %}
             <div class="card mt-3">
-                <div class="card-header">{{ answer.question }}</div>
+                <div class="card-header">{{ answer.entry }}</div>
                 <div class="card-body">
                     <div class="card-text">{{ answer.content|markdown }}</div>
                 </div>

@@ -11,7 +11,7 @@ class HomePageCest
         $I->canSee('Quena', 'h1');
     }
 
-    public function itHasASearchFormToFindQuestionsWithAnswers(FunctionalTester $I): void
+    public function itHasASearchFormToFindEntriesWithAnswers(FunctionalTester $I): void
     {
         $I->amOnPage('/');
         $I->canSeeElement('form');

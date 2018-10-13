@@ -8,7 +8,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>{{ 'app.field.answer.question'|trans }}</th>
+                <th>{{ 'app.field.answer.entry'|trans }}</th>
                 <th>{{ 'app.field.answer.content'|trans }}</th>
                 <th>{{ 'app.field.actions'|trans }}</th>
             </tr>
@@ -16,7 +16,7 @@
         <tbody>
         {% for answer in answers %}
             <tr>
-                <td>{{ answer.question }}</td>
+                <td>{{ answer.entry }}</td>
                 <td>{{ answer.content|markdown }}</td>
                 <td class="d-flex">
                     <a id="edit_answer_{{ answer.id }}" class="btn btn-primary mr-2" href="{{ path('answer_edit', {'id': answer.id}) }}">{{ 'app.button.edit'|trans }}</a>

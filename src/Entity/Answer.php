@@ -26,7 +26,7 @@ class Answer
      *
      * @ApiFilter(SearchFilter::class, strategy="partial")
      */
-    private $question;
+    private $entry;
 
     /**
      * @ORM\Column(type="text")
@@ -38,14 +38,14 @@ class Answer
         return $this->id;
     }
 
-    public function getQuestion(): ?string
+    public function getEntry(): ?string
     {
-        return $this->question;
+        return $this->entry;
     }
 
-    public function setQuestion(string $question): void
+    public function setEntry(string $entry): void
     {
-        $this->question = $question;
+        $this->entry = $entry;
     }
 
     public function getContent(): ?string
