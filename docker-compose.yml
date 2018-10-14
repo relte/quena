@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+    quena_nginx:
+        image: zelton/quena-nginx:0.1
+        container_name: quena_nginx_dev
+        ports:
+            - "8000:8080"
+        volumes:
+            - ./public:/var/www/public
+    quena_php:
+        image: zelton/quena-php:0.1
+        container_name: quena_php_dev
+        volumes:
+            - .:/var/www
