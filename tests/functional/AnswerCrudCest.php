@@ -2,8 +2,6 @@
 
 namespace App\Tests;
 
-use App\Entity\Answer;
-
 class AnswerCrudCest
 {
     const FIRST_ENTRY = 'How can you find an answer in Quena?';
@@ -43,6 +41,27 @@ class AnswerCrudCest
         $I->click('#save_answer');
         $I->see(self::FIRST_ENTRY);
         $I->see(self::FIRST_ANSWER_CONTENT);
+    }
+
+    public function itValidatesEntryWhenCreatingANewAnswer(FunctionalTester $I): void
+    {
+        $this->testValidationWith($I, '', self::FIRST_ANSWER_CONTENT);
+    }
+
+    public function itValidatesContentWhenCreatingANewAnswer(FunctionalTester $I): void
+    {
+        $this->testValidationWith($I, self::FIRST_ENTRY, '');
+    }
+
+    private function testValidationWith(FunctionalTester $I, $entry, $content): void
+    {
+        $I->amOnPage('/answers/new');
+        $I->fillField('Entry', $entry);
+        $I->fillField('Content', $content);
+        $I->click('#save_answer');
+        $I->canSee('This value should not be blank.');
+        $I->amOnPage('/answers');
+        $I->cantSee(self::FIRST_ENTRY);
     }
 
     public function itEditsAnAnswer(FunctionalTester $I): void

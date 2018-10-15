@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AnswerRepository")
@@ -23,6 +24,7 @@ class Answer
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      *
      * @ApiFilter(SearchFilter::class, strategy="partial")
      */
@@ -30,6 +32,7 @@ class Answer
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $content;
 
