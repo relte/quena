@@ -3,9 +3,9 @@
 {% block main %}
     <div class="d-flex flex-column align-items-center">
         {{ parent() }}
-        <form class="form-inline mb-4" method="get" action="/">
-            <input class="form-control mr-2" name="search" type="text">
-            <button id="search" class="btn btn-primary action-search" type="submit">{{ 'app.button.search'|trans }}</button>
+        <form class="form-inline mb-4 search-form" method="get" action="/">
+            <input class="form-control" name="search" type="text" autofocus placeholder="{{ 'app.placeholder.seach'|trans }}...">
+            <button id="search" class="btn btn-link action-search" type="submit"><i class="fas fa-search"></i></button>
         </form>
         <a href="{{ path('answer_index') }}">{{ 'app.link.manage_answers'|trans }}</a>
     </div>
