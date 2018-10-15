@@ -4,7 +4,7 @@ namespace App\Tests;
 
 use Codeception\Util\HttpCode;
 
-class ShowAnswersCest
+class AnswersApiCest
 {
     const FIRST_ENTRY = 'How can you find an answer in Quena?';
     const FIRST_ANSWER_CONTENT = 'Type a phrase you are looking for and click the "Search" button.';
@@ -23,7 +23,7 @@ class ShowAnswersCest
         $I->haveHttpHeader('Accept', 'application/json');
     }
 
-    public function showAnswers(ApiTester $I): void
+    public function itReturnsAnswerCollection(ApiTester $I): void
     {
         $I->sendGET('/answers');
         $I->seeResponseCodeIs(HttpCode::OK);
@@ -47,7 +47,7 @@ class ShowAnswersCest
         ]);
     }
 
-    public function searchForAnswers(ApiTester $I): void
+    public function itFiltersAnswersWithEntryPhrase(ApiTester $I): void
     {
         $I->sendGET('/answers?entry=emphasize');
         $I->seeResponseCodeIs(HttpCode::OK);
@@ -59,5 +59,17 @@ class ShowAnswersCest
                 'content' => self::THIRD_ANSWER_CONTENT
             ]
         ]);
+    }
+
+    public function itSupportsOnlyGetOperations(ApiTester $I): void
+    {
+        $I->sendPOST('/answers');
+        $I->seeResponseCodeIs(HttpCode::METHOD_NOT_ALLOWED);
+
+        $I->sendPUT('/answers/1');
+        $I->seeResponseCodeIs(HttpCode::METHOD_NOT_ALLOWED);
+
+        $I->sendDELETE('/answers/1');
+        $I->seeResponseCodeIs(HttpCode::METHOD_NOT_ALLOWED);
     }
 }
