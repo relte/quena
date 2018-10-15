@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% set with_answers = answers is defined and answers is not empty %}
+
+{% block container_class %}{% if not with_answers %}homepage-center{% endif %}{% endblock %}
+
 {% block main %}
     <div class="d-flex flex-column align-items-center">
         {{ parent() }}
@@ -12,7 +16,7 @@
 {% endblock %}
 
 {% block body %}
-    {% if answers is defined and answers is not empty %}
+    {% if with_answers %}
         {% for answer in answers %}
             <div class="card mt-3">
                 <div class="card-header">{{ answer.entry }}</div>

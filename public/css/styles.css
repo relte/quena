@@ -36,3 +36,7 @@ a:hover {
 ::placeholder {
     opacity: .3 !important;
 }
+
+.homepage-center {
+    margin-top: 25vh !important;
+}

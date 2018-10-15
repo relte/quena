@@ -2,6 +2,8 @@
 
 namespace App\Tests;
 
+use Codeception\Util\HttpCode;
+
 class AnswerCrudCest
 {
     const FIRST_ENTRY = 'How can you find an answer in Quena?';
@@ -12,6 +14,7 @@ class AnswerCrudCest
 
     public function itShowsAnswers(FunctionalTester $I): void
     {
+        $I->amHttpAuthenticated('admin', 'admin');
         $I->persistAnswer(self::FIRST_ENTRY, self::FIRST_ANSWER_CONTENT);
         $I->persistAnswer(self::SECOND_ENTRY, self::SECOND_ANSWER_CONTENT);
 
@@ -24,6 +27,7 @@ class AnswerCrudCest
 
     public function itShowsAnAnswerWithMarkdownParsed(FunctionalTester $I): void
     {
+        $I->amHttpAuthenticated('admin', 'admin');
         $I->persistAnswer(
             'How do you emphasize a phrase in Markdown?',
             'To _emphasize_ wrap a phrase with single underscores.'
@@ -35,6 +39,7 @@ class AnswerCrudCest
 
     public function itCreatesANewAnswer(FunctionalTester $I): void
     {
+        $I->amHttpAuthenticated('admin', 'admin');
         $I->amOnPage('/answers/new');
         $I->fillField('Entry', self::FIRST_ENTRY);
         $I->fillField('Content', self::FIRST_ANSWER_CONTENT);
@@ -55,6 +60,7 @@ class AnswerCrudCest
 
     private function testValidationWith(FunctionalTester $I, $entry, $content): void
     {
+        $I->amHttpAuthenticated('admin', 'admin');
         $I->amOnPage('/answers/new');
         $I->fillField('Entry', $entry);
         $I->fillField('Content', $content);
@@ -66,6 +72,7 @@ class AnswerCrudCest
 
     public function itEditsAnAnswer(FunctionalTester $I): void
     {
+        $I->amHttpAuthenticated('admin', 'admin');
         $I->persistAnswer(self::FIRST_ENTRY, self::FIRST_ANSWER_CONTENT);
 
         $I->amOnPage('/answers');
@@ -86,6 +93,7 @@ class AnswerCrudCest
 
     public function itDeletesAnAnswer(FunctionalTester $I): void
     {
+        $I->amHttpAuthenticated('admin', 'admin');
         $I->persistAnswer(self::FIRST_ENTRY, self::FIRST_ANSWER_CONTENT);
 
         $I->amOnPage('/answers');
@@ -93,5 +101,19 @@ class AnswerCrudCest
 
         $I->cantSee(self::FIRST_ENTRY);
         $I->cantSee(self::FIRST_ANSWER_CONTENT);
+    }
+
+    public function itPreventsAccessToNotAuthenticatedUser(FunctionalTester $I): void
+    {
+        $I->persistAnswer(self::FIRST_ENTRY, self::FIRST_ANSWER_CONTENT);
+
+        $I->amOnPage('/answers');
+        $I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
+
+        $I->amOnPage('/answers/new');
+        $I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
+
+        $I->amOnPage('/answers/1/edit');
+        $I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
     }
 }
