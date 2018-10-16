@@ -4,27 +4,21 @@ if [[ -z "$APP_ENV" ]]; then
     source .env
 fi
 
-if [[ "$1" == "init" ]]; then
-    INSTALLATION_TYPE="$1"
-    echo "--- INITIALIZATION -->"
-    AFTER_INFO="<-- INITIALIZATION ---"
-else
-    INSTALLATION_TYPE="$APP_ENV"
-    echo "--- INSTALLATION FOR $APP_ENV ENVIRONMENT -->"
-    AFTER_INFO="<-- INSTALLATION FOR $APP_ENV ENVIRONMENT ---"
-fi
+INSTALLATION_TYPE="$APP_ENV"
+
+echo "--- INSTALLATION FOR $APP_ENV ENVIRONMENT -->"
 
 case "$INSTALLATION_TYPE" in
     "dev")
         composer install
-        php bin/console doctrine:schema:update --force
+        php bin/console doctrine:migration:migrate -n
         ;;
-    "init")
-        php bin/console doctrine:schema:update --force
+    "prod")
+        php bin/console doctrine:migration:migrate -n
         ;;
     *)
-        echo "Installation type has not been specified"
+        echo "Installation environment has not been specified"
         ;;
 esac
 
-echo "$AFTER_INFO"
+echo "<-- INSTALLATION FOR $APP_ENV ENVIRONMENT ---"
