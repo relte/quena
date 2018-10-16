@@ -15,7 +15,8 @@ services:
             - APP_ENV=prod
             - APP_SECRET=38cf2f1d1c90c5082e82227e2d975d1c
             # default password 'admin', you can generate a different one with bin/console security:encode-password
-            - ADMIN_PASSWORD='$2y$12$pu1i1/VoBkr/JZztTip8s.7//0b2U3C2b94trectvXg/eJxRQ7WUi'
+            # remember to escape all the dollar signs with another one
+            - ADMIN_PASSWORD=$$2y$$12$$pu1i1/VoBkr/JZztTip8s.7//0b2U3C2b94trectvXg/eJxRQ7WUi
             - CORS_ALLOW_ORIGIN=https://quena.yourdomain.com
             - DATABASE_URL=sqlite:///%kernel.project_dir%/var/data.db
             - TZ=Europe/Warsaw
