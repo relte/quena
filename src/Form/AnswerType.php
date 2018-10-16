@@ -14,9 +14,12 @@ class AnswerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('entry', TextType::class)
-            ->add('content', TextareaType::class)
-        ;
+            ->add('entry', TextType::class, [
+                'help' => 'app.field.answer.entry_help'
+            ])
+            ->add('content', TextareaType::class, [
+                'help' => 'app.field.answer.content_help'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

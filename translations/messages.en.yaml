@@ -21,5 +21,7 @@ app:
     field:
         answer:
             entry: Entry
+            entry_help: maximum 255 characters
             content: Content
+            content_help: maximum 1000 characters
         actions: Actions
