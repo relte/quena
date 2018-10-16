@@ -2,26 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Answer;
+use App\Entity\Entry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class AnswerRepository extends ServiceEntityRepository
+class EntryRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Answer::class);
+        parent::__construct($registry, Entry::class);
     }
 
     /**
-     * @return Answer[]
+     * @return Entry[]
      */
-    public function findByPhrase(string $phrase): array
+    public function findByTitlePart(string $titlePart): array
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.entry LIKE :phrase')
-            ->setParameter('phrase', '%' . $phrase . '%')
-            ->setMaxResults(5)
+            ->andWhere('a.title LIKE :titlePart')
+            ->setParameter('titlePart', '%' . $titlePart . '%')
             ->getQuery()
             ->getResult();
     }

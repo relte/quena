@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | {{ 'app.header.new_answer'|trans }}{% endblock %}
+{% block title %}{{ parent() }} | {{ 'app.header.new_entry'|trans }}{% endblock %}
 
 {% block body %}
-    <h3><a href="{{ path('answer_index') }}">{{ 'app.header.answer_list'|trans }}</a> | {{ 'app.header.new_answer'|trans }}</h3>
+    <h3><a href="{{ path('entry_index') }}">{{ 'app.header.entry_list'|trans }}</a> | {{ 'app.header.new_entry'|trans }}</h3>
 
-    {{ include('answer/_form.html.twig') }}
+    {{ include('entry/_form.html.twig') }}
 {% endblock %}
 
 {% block stylesheets %}
@@ -14,5 +14,5 @@
 
 {% block javascripts %}
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-    <script>{% include 'answer/_markdown_editor.js.twig' %}</script>
+    <script>{% include 'entry/_markdown_editor.js.twig' %}</script>
 {% endblock %}

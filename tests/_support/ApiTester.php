@@ -1,7 +1,7 @@
 <?php
 namespace App\Tests;
 
-use App\Entity\Answer;
+use App\Entity\Entry;
 
 /**
  * Inherited Methods
@@ -22,12 +22,12 @@ class ApiTester extends \Codeception\Actor
 {
     use _generated\ApiTesterActions;
 
-    public function persistAnswer(string $entry, string $content): void
+    public function persistEntry(string $name, string $content): void
     {
-        $answer = new Answer();
-        $answer->setEntry($entry);
-        $answer->setContent($content);
-        $this->persistEntity($answer);
+        $entry = new Entry();
+        $entry->setTitle($name);
+        $entry->setContent($content);
+        $this->persistEntity($entry);
     }
 
     public function seeJsonResponseEquals(array $expected): void

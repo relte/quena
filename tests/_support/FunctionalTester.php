@@ -1,7 +1,7 @@
 <?php
 namespace App\Tests;
 
-use App\Entity\Answer;
+use App\Entity\Entry;
 
 /**
  * Inherited Methods
@@ -22,15 +22,15 @@ class FunctionalTester extends \Codeception\Actor
 {
     use _generated\FunctionalTesterActions;
 
-    public function persistAnswer(string $entry, string $content): void
+    public function persistEntry(string $name, string $content): void
     {
-        $answer = new Answer();
-        $answer->setEntry($entry);
-        $answer->setContent($content);
-        $this->persistEntity($answer);
+        $entry = new Entry();
+        $entry->setTitle($name);
+        $entry->setContent($content);
+        $this->persistEntity($entry);
     }
 
-    public function searchForAnswer(string $phrase): void
+    public function searchForEntry(string $phrase): void
     {
         $this->amOnPage('/');
         $this->fillField(['name' => 'search'], $phrase);

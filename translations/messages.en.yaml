@@ -7,11 +7,11 @@ app:
     placeholder:
         seach: Search
     header:
-        new_answer: Add a new answer
-        edit_answer: Edit the answer
-        answer_list: Answers
+        new_entry: Add a new entry
+        edit_entry: Edit the entry
+        entry_list: Entries
     link:
-        manage_answers: manage answers
+        manage_entries: manage entries
         create_new: create new
         go_back_to_list: go back to the list
     confirmation:
@@ -19,9 +19,9 @@ app:
     info:
         nothing_found: nothing found
     field:
-        answer:
+        entry:
             entry: Entry
-            entry_help: maximum 255 characters
+            name_help: maximum 255 characters
             content: Content
             content_help: maximum 1000 characters
         actions: Actions

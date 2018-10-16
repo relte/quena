@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\AnswerRepository;
+use App\Repository\EntryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,11 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    private $answerRepository;
+    private $entryRepository;
 
-    public function __construct(AnswerRepository $answerRepository)
+    public function __construct(EntryRepository $entryRepository)
     {
-        $this->answerRepository = $answerRepository;
+        $this->entryRepository = $entryRepository;
     }
 
     /**
@@ -26,9 +26,9 @@ class HomeController extends AbstractController
 
         if ($request->query->has('search')) {
             $searchPhrase = $request->query->get('search');
-            $answers = $this->answerRepository->findByPhrase($searchPhrase);
+            $entries = $this->entryRepository->findByTitlePart($searchPhrase);
 
-            $parameters = ['answers' => $answers];
+            $parameters = ['entries' => $entries];
         }
 
         return $this->render('home/index.html.twig', $parameters);

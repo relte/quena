@@ -9,14 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AnswerRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\EntryRepository")
  *
  * @ApiResource(
  *     collectionOperations={"get"},
  *     itemOperations={"get"}
  * )
  */
-class Answer
+class Entry
 {
     /**
      * @ORM\Id()
@@ -32,7 +32,7 @@ class Answer
      *
      * @ApiFilter(SearchFilter::class, strategy="partial")
      */
-    private $entry;
+    private $title;
 
     /**
      * @ORM\Column(type="text")
@@ -46,14 +46,14 @@ class Answer
         return $this->id;
     }
 
-    public function getEntry(): ?string
+    public function getTitle(): ?string
     {
-        return $this->entry;
+        return $this->title;
     }
 
-    public function setEntry(string $entry): void
+    public function setTitle(string $title): void
     {
-        $this->entry = $entry;
+        $this->title = $title;
     }
 
     public function getContent(): ?string

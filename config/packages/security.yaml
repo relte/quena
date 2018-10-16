@@ -21,4 +21,4 @@ security:
             anonymous: true
             http_basic: true
     access_control:
-         - { path: ^/answers, roles: ROLE_ADMIN }
+         - { path: ^/entries, roles: ROLE_ADMIN }
