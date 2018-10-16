@@ -28,6 +28,7 @@ class Answer
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @Assert\Length(max=255)
      *
      * @ApiFilter(SearchFilter::class, strategy="partial")
      */
@@ -36,6 +37,7 @@ class Answer
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
+     * @Assert\Length(max=1000)
      */
     private $content;
 

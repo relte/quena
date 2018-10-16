@@ -50,22 +50,28 @@ class AnswerCrudCest
 
     public function itValidatesEntryWhenCreatingANewAnswer(FunctionalTester $I): void
     {
-        $this->testValidationWith($I, '', self::FIRST_ANSWER_CONTENT);
+        $this->testValidationWith($I, '', self::FIRST_ANSWER_CONTENT, 'This value should not be blank.');
+
+        $tooLongEntry = str_repeat('a', 256);
+        $this->testValidationWith($I, $tooLongEntry, self::FIRST_ANSWER_CONTENT, 'This value is too long. It should have 255 characters or less.');
     }
 
     public function itValidatesContentWhenCreatingANewAnswer(FunctionalTester $I): void
     {
-        $this->testValidationWith($I, self::FIRST_ENTRY, '');
+        $this->testValidationWith($I, self::FIRST_ENTRY, '', 'This value should not be blank.');
+
+        $tooLongAnswerContent = str_repeat('a', 1001);
+        $this->testValidationWith($I, self::FIRST_ENTRY, $tooLongAnswerContent, 'This value is too long. It should have 1000 characters or less.');
     }
 
-    private function testValidationWith(FunctionalTester $I, $entry, $content): void
+    private function testValidationWith(FunctionalTester $I, $entry, $content, $errorMessage): void
     {
         $I->amHttpAuthenticated('admin', 'admin');
         $I->amOnPage('/answers/new');
         $I->fillField('Entry', $entry);
         $I->fillField('Content', $content);
         $I->click('#save_answer');
-        $I->canSee('This value should not be blank.');
+        $I->canSee($errorMessage);
         $I->amOnPage('/answers');
         $I->cantSee(self::FIRST_ENTRY);
     }
